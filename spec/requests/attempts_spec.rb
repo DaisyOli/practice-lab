@@ -21,19 +21,19 @@ RSpec.describe "Dialogue reconstruction attempts", type: :request do
   it "re-renders the exercise when the submission is incomplete" do
     post dialogue_attempts_path(dialogue), params: { turn_ids: correct_ids.first(2) }
 
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
     expect(response.body).to include("Check my order")
   end
 
   it "handles a submission with no turns" do
     post dialogue_attempts_path(dialogue)
 
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
   end
 
   it "rejects non-numeric turn ids without crashing" do
     post dialogue_attempts_path(dialogue), params: { turn_ids: correct_ids.first(3).map(&:to_s) + [ "abc" ] }
 
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
   end
 end

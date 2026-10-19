@@ -9,7 +9,7 @@ class AttemptsController < ApplicationController
     else
       @turns = @dialogue.shuffled_turns
       flash.now[:alert] = "Something went wrong with your answer. Please order every turn and submit again."
-      render "dialogues/show", status: :unprocessable_entity
+      render "dialogues/show", status: :unprocessable_content
     end
   end
 end
