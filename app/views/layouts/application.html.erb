@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Practice Lab" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,8 +23,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="min-h-screen bg-base-200">
+    <header class="navbar bg-base-100 border-b border-base-300 px-4">
+      <div class="flex-1">
+        <%= link_to "Practice Lab", root_path, class: "text-xl font-bold" %>
+        <span class="badge badge-outline badge-sm ml-2">synthetic data only</span>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8">
       <%= yield %>
     </main>
   </body>

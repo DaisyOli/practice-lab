@@ -1,0 +1,31 @@
+<% content_for :title, "Experiments · Practice Lab" %>
+
+<section aria-labelledby="experiments-heading">
+  <header class="mb-8">
+    <h1 id="experiments-heading" class="text-3xl font-bold">Experiments</h1>
+    <p class="mt-2 text-base-content/70">
+      Prototypes of language-learning interactions, tested with synthetic data before anything reaches Practice-FR or Practice-BR.
+    </p>
+  </header>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <% @experiments.each do |experiment| %>
+      <li class="card bg-base-100 border border-base-300 shadow-sm">
+        <article class="card-body">
+          <div class="flex items-start justify-between gap-2">
+            <h2 class="card-title"><%= experiment.title %></h2>
+            <%= experiment_status_badge(experiment) %>
+          </div>
+          <p class="text-base-content/80"><%= experiment.purpose %></p>
+          <div class="card-actions justify-end mt-2">
+            <% if (path = experiment_entry_path(experiment)) %>
+              <%= link_to "Open", path, class: "btn btn-primary btn-sm", aria: { label: "Open #{experiment.title}" } %>
+            <% else %>
+              <span class="text-sm text-base-content/60">Not built yet</span>
+            <% end %>
+          </div>
+        </article>
+      </li>
+    <% end %>
+  </ul>
+</section>
