@@ -33,7 +33,7 @@ class Dialogue < ApplicationRecord
 
   # A submission is valid only if it contains every turn of this dialogue exactly once.
   def valid_submission?(turn_ids)
-    turn_ids.sort == turns.ids.sort
+    turn_ids.all?(Integer) && turn_ids.sort == turns.ids.sort
   end
 
   def check(turn_ids)
