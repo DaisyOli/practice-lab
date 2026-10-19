@@ -10,8 +10,6 @@ The goal is not to build a third SaaS product.
 
 The goal is to create a safe R&D environment where new exercise formats, gamification mechanics, feedback systems and learning UX ideas can be implemented quickly, tested with synthetic data, evaluated, refactored and discarded when necessary.
 
-Practice Lab may also be used during AI-assisted coding evaluation sessions.
-
 ---
 
 ## Why This Project Exists
@@ -458,50 +456,7 @@ Test different ways to explain mistakes:
 
 # AI Experiments — Later Phase
 
-Practice Lab may eventually include AI-assisted experiments, but AI should not be added simply because the project is AI-adjacent.
-
-Potential future uses:
-
-## AI feedback comparison
-
-Compare two feedback strategies for an open response.
-
-Evaluate:
-
-- accuracy;
-- tone;
-- usefulness;
-- CEFR appropriateness;
-- verbosity;
-- consistency.
-
----
-
-## AI-generated activities
-
-Generate draft activities from structured prompts.
-
-Every generated activity must remain a draft until reviewed.
-
-Potential evaluation rubric:
-
-- pedagogical coherence;
-- plausible distractors;
-- level appropriateness;
-- progression of difficulty;
-- linguistic correctness;
-- cultural authenticity;
-- repetition avoidance.
-
----
-
-## Model-task comparison
-
-Different tasks may use different model strategies.
-
-A model suitable for high-quality low-volume content generation may not be the right choice for high-volume feedback.
-
-Keep evaluation criteria explicit.
+Practice Lab may eventually include AI-assisted learner features (for example, feedback on open responses or draft activities reviewed by a teacher), but AI should not be added simply because it is available. Any such feature must still answer the four pedagogy questions above.
 
 ---
 
@@ -528,26 +483,6 @@ Avoid:
 - complex dependency chains;
 - speculative scalability;
 - “enterprise” architecture for experimental prototypes.
-
----
-
-# AI Coding Assistant Evaluation
-
-When this repository is used during AI-assisted coding evaluation sessions, the developer may need to compare two proposed solutions.
-
-When evaluating competing implementations, consider:
-
-1. Correctness
-2. Fit with existing architecture
-3. Simplicity
-4. Maintainability
-5. Testability
-6. Accessibility
-7. Failure handling
-8. Unnecessary complexity
-9. Ease of future porting into Practice applications
-
-The preferred solution is not necessarily the longest or most sophisticated one.
 
 Favor the smallest solution that correctly solves the problem and fits the architecture.
 
@@ -576,7 +511,7 @@ Before committing, always inspect staged changes for secrets or personal data.
 
 # Relationship to Practice-FR and Practice-BR
 
-Practice-FR and Practice-BR are production applications.
+Practice-FR and Practice-BR are production applications. Practice Lab, Practice-FR and Practice-BR are all personally and solely owned by the same developer.
 
 Practice Lab is their **experimental R&D playground**, not a shared production dependency.
 

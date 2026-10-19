@@ -4,7 +4,7 @@
 
 It uses synthetic data only and focuses on rapid experimentation, pedagogical validation and reusable product ideas.
 
-Practice Lab is independent from the Practice-FR and Practice-BR production apps. It shares no code, database or credentials with them. Ideas that prove useful here may be reimplemented there later.
+Practice Lab is a personal project by Daisy Oliani, who also solely owns the Practice-FR and Practice-BR apps. It is kept independent from them: it shares no code, database, credentials or users with them. Ideas that prove useful here may be reimplemented there later.
 
 ## Experiments
 
