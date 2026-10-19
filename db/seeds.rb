@@ -37,3 +37,12 @@
 ].each do |attrs|
   Experiment.find_or_initialize_by(slug: attrs[:slug]).update!(attrs)
 end
+
+# Fictional learner profiles (not real people).
+[
+  { name: "Clara", cefr_level: "A1" },
+  { name: "Matteo", cefr_level: "B1" },
+  { name: "Sofia", cefr_level: "C1" }
+].each do |attrs|
+  Learner.find_or_initialize_by(name: attrs[:name]).update!(attrs)
+end
