@@ -1,0 +1,28 @@
+<% content_for :title, "Dialogue Reconstruction · Practice Lab" %>
+
+<section aria-labelledby="dialogues-heading">
+  <header class="mb-8">
+    <h1 id="dialogues-heading" class="text-3xl font-bold">Dialogue Reconstruction</h1>
+    <p class="mt-2 text-base-content/70">
+      The turns of a short dialogue are shuffled. Put them back in order to rebuild the conversation.
+    </p>
+  </header>
+
+  <ul class="space-y-3">
+    <% @dialogues.each do |dialogue| %>
+      <% at_learner_level = selected_learner&.cefr_level == dialogue.cefr_level %>
+      <li class="card bg-base-100 border <%= at_learner_level ? "border-primary" : "border-base-300" %>">
+        <div class="card-body flex-row items-center justify-between py-4">
+          <div class="flex items-center gap-3">
+            <span class="badge badge-outline"><%= dialogue.cefr_level %></span>
+            <h2 class="font-semibold" lang="<%= dialogue.language %>"><%= dialogue.title %></h2>
+            <% if at_learner_level %>
+              <span class="badge badge-primary badge-sm">Your level</span>
+            <% end %>
+          </div>
+          <%= link_to "Start", dialogue_path(dialogue), class: "btn btn-primary btn-sm", aria: { label: "Start #{dialogue.title}" } %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</section>

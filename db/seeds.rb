@@ -46,3 +46,38 @@ end
 ].each do |attrs|
   Learner.find_or_initialize_by(name: attrs[:name]).update!(attrs)
 end
+
+# Synthetic dialogues for Dialogue Reconstruction.
+# Each must have exactly one plausible order; see docs/experiments/dialogue_reconstruction.md.
+[
+  {
+    title: "Uma viagem ao Rio",
+    cefr_level: "A2",
+    language: "pt-BR",
+    turns: [
+      "Você já foi ao Rio?",
+      "Sim, fui no ano passado.",
+      "E o que você mais gostou?",
+      "Das praias, sem dúvida."
+    ]
+  },
+  {
+    title: "Remarcando o almoço",
+    cefr_level: "B1",
+    language: "pt-BR",
+    turns: [
+      "Oi, Marina! Posso te pedir um favor?",
+      "Claro, pode falar.",
+      "Será que a gente pode mudar o almoço de quinta para sexta?",
+      "Sexta eu não consigo, mas sábado ficaria ótimo.",
+      "Combinado, então. Sábado ao meio-dia?"
+    ]
+  }
+].each do |attrs|
+  dialogue = Dialogue.find_or_initialize_by(title: attrs[:title])
+  dialogue.update!(attrs.except(:turns))
+  dialogue.turns.destroy_all
+  attrs[:turns].each.with_index(1) do |text, position|
+    dialogue.turns.create!(text: text, position: position)
+  end
+end

@@ -1,0 +1,40 @@
+<% content_for :title, "#{@dialogue.title} · Practice Lab" %>
+
+<article aria-labelledby="dialogue-heading" class="max-w-2xl mx-auto">
+  <%= link_to "← All dialogues", dialogues_path, class: "link link-hover text-sm" %>
+
+  <header class="mt-4 mb-6">
+    <div class="flex items-center gap-3">
+      <h1 id="dialogue-heading" class="text-2xl font-bold" lang="<%= @dialogue.language %>"><%= @dialogue.title %></h1>
+      <span class="badge badge-outline"><%= @dialogue.cefr_level %></span>
+    </div>
+    <p class="mt-2 text-base-content/70">
+      Use the Move up and Move down buttons to put the turns in order, then check your answer.
+    </p>
+  </header>
+
+  <%= turbo_frame_tag "reconstruction" do %>
+    <% if flash[:alert] %>
+      <div role="alert" class="alert alert-error mb-4"><%= flash[:alert] %></div>
+    <% end %>
+
+    <%= form_with url: dialogue_attempts_path(@dialogue), data: { controller: "reorder" } do |form| %>
+      <ol class="space-y-2" data-reorder-target="list" lang="<%= @dialogue.language %>">
+        <% @turns.each do |turn| %>
+          <li class="flex items-center gap-3 rounded-box border border-base-300 bg-base-100 p-3" data-reorder-target="item">
+            <%= hidden_field_tag "turn_ids[]", turn.id, id: nil %>
+            <span class="flex-1">— <%= turn.text %></span>
+            <span class="flex gap-1" lang="en">
+              <button type="button" class="btn btn-sm btn-ghost" data-action="reorder#moveUp" aria-label="Move up: <%= turn.text %>">↑</button>
+              <button type="button" class="btn btn-sm btn-ghost" data-action="reorder#moveDown" aria-label="Move down: <%= turn.text %>">↓</button>
+            </span>
+          </li>
+        <% end %>
+      </ol>
+
+      <div class="mt-6">
+        <%= form.submit "Check my order", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+</article>

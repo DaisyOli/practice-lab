@@ -14,6 +14,8 @@ module ExperimentsHelper
   # Only experiments that have been built have somewhere to go.
   # Add a mapping here when an experiment gets its own routes.
   def experiment_entry_path(experiment)
-    nil
+    case experiment.slug
+    when "dialogue-reconstruction" then dialogues_path
+    end
   end
 end

@@ -1,0 +1,39 @@
+<%= turbo_frame_tag "reconstruction" do %>
+  <% total = @check.expected_turns.size %>
+
+  <% if @check.correct? %>
+    <div role="status" class="alert alert-success mb-4">Well done! The dialogue is in the right order.</div>
+  <% else %>
+    <div role="status" class="alert alert-warning mb-4">
+      <%= @check.correct_count %> of <%= total %> turns are in the right place.
+    </div>
+  <% end %>
+
+  <ol class="space-y-2" lang="<%= @dialogue.language %>">
+    <% @check.submitted_turns.each_with_index do |turn, index| %>
+      <% correct = @check.correct_at?(index) %>
+      <li class="flex items-center gap-3 rounded-box border p-3 <%= correct ? "border-success bg-success/10" : "border-error bg-error/10" %>">
+        <span class="flex-1">— <%= turn.text %></span>
+        <span class="badge <%= correct ? "badge-success" : "badge-error" %>" lang="en">
+          <%= correct ? "✓ Right place" : "✗ Wrong place" %>
+        </span>
+      </li>
+    <% end %>
+  </ol>
+
+  <div class="mt-6 flex flex-wrap items-center gap-3">
+    <%= link_to "Try again", dialogue_path(@dialogue), class: "btn btn-primary" %>
+    <%= link_to "All dialogues", dialogues_path, class: "btn btn-ghost", data: { turbo_frame: "_top" } %>
+  </div>
+
+  <% unless @check.correct? %>
+    <details class="mt-6">
+      <summary class="cursor-pointer">Show the correct order</summary>
+      <ol class="mt-2 list-decimal pl-6 space-y-1" lang="<%= @dialogue.language %>">
+        <% @check.expected_turns.each do |turn| %>
+          <li><%= turn.text %></li>
+        <% end %>
+      </ol>
+    </details>
+  <% end %>
+<% end %>

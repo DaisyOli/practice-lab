@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   root "experiments#index"
 
   resource :selected_learner, only: :update
+
+  # Experiment 1: Dialogue Reconstruction
+  resources :dialogues, only: [ :index, :show ] do
+    resources :attempts, only: :create
+  end
 end

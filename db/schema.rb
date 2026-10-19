@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_19_190607) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_19_190704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "dialogue_turns", force: :cascade do |t|
+    t.bigint "dialogue_id", null: false
+    t.integer "position"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dialogue_id"], name: "index_dialogue_turns_on_dialogue_id"
+  end
+
+  create_table "dialogues", force: :cascade do |t|
+    t.string "title"
+    t.string "cefr_level"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "experiments", force: :cascade do |t|
     t.string "title"
@@ -30,4 +47,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_190607) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "dialogue_turns", "dialogues"
 end
