@@ -2,9 +2,9 @@
   <% total = @check.expected_turns.size %>
 
   <% if @check.correct? %>
-    <div role="status" class="alert alert-success mb-4">Well done! The dialogue is in the right order.</div>
+    <div role="status" class="alert alert-success mb-4" tabindex="-1" autofocus>Well done! The dialogue is in the right order.</div>
   <% else %>
-    <div role="status" class="alert alert-warning mb-4">
+    <div role="status" class="alert alert-warning mb-4" tabindex="-1" autofocus>
       <%= @check.correct_count %> of <%= total %> turns are in the right place.
     </div>
   <% end %>

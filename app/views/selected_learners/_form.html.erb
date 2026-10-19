@@ -1,5 +1,5 @@
 <%= form_with url: selected_learner_path, method: :patch, class: "flex items-center gap-2" do |form| %>
-  <%= form.label :learner_id, "Fictional learner", class: "text-sm" %>
+  <%= form.label :learner_id, "Fictional learner", class: "text-sm whitespace-nowrap" %>
   <%= form.select :learner_id,
         options_from_collection_for_select(Learner.order(:id), :id, :label, selected_learner&.id),
         { include_blank: selected_learner.nil? && "Choose…" },

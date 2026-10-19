@@ -15,14 +15,15 @@
 
   <%= turbo_frame_tag "reconstruction" do %>
     <% if flash[:alert] %>
-      <div role="alert" class="alert alert-error mb-4"><%= flash[:alert] %></div>
+      <div role="alert" class="alert alert-error mb-4" tabindex="-1" autofocus><%= flash[:alert] %></div>
     <% end %>
 
     <%= form_with url: dialogue_attempts_path(@dialogue), data: { controller: "reorder" } do |form| %>
       <ol class="space-y-2" data-reorder-target="list" lang="<%= @dialogue.language %>">
-        <% @turns.each do |turn| %>
+        <% @turns.each.with_index(1) do |turn, number| %>
           <li class="flex items-center gap-3 rounded-box border border-base-300 bg-base-100 p-3" data-reorder-target="item">
             <%= hidden_field_tag "turn_ids[]", turn.id, id: nil %>
+            <span class="w-6 font-mono text-base-content/60" aria-hidden="true" data-reorder-target="number"><%= number %>.</span>
             <span class="flex-1">— <%= turn.text %></span>
             <span class="flex gap-1" lang="en">
               <button type="button" class="btn btn-sm btn-ghost" data-action="reorder#moveUp" aria-label="Move up: <%= turn.text %>">↑</button>
@@ -31,6 +32,8 @@
           </li>
         <% end %>
       </ol>
+
+      <p class="sr-only" role="status" aria-live="polite" data-reorder-target="status"></p>
 
       <div class="mt-6">
         <%= form.submit "Check my order", class: "btn btn-primary" %>
