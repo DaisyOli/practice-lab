@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* daisyUI v5.7.50, vendored from https://github.com/saadeghi/daisyui/releases (no Node needed) */
+@plugin "./daisyui.mjs" {
+  themes: light --default, dark --prefersdark;
+}
